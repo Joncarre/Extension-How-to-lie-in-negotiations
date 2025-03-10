@@ -131,7 +131,7 @@ public class AGS_Population {
     }
     
     /**
-     * Normaliza el vector haciendo que el valor absoluto sea igual a 1000
+     * Normalizes the vector by making the absolute value equal to 1000
      */
     public Vector<Double> formalizePreferences(Vector<Double> preference) {
     	double aux = 0;
