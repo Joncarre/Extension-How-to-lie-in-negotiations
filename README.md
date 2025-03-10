@@ -4,3 +4,7 @@ This repository contains the resources that complement the article *Extension Ho
 
 > [!NOTE]
 > To carry out all the tests, numerous modifications of the algorithms were necessary. As an example, it has been decided to show the configuration of the Limited1 scenario. If you are interested in knowing the configuration for any of the specific tests or the parameters used in the tests, please send an e-mail to `joncarre@ucm.es`.
+
+
+> [!TIP]
+> The folders shown here contain the `src` directory of the projects where the genetic algorithms have been launched. To make use of the algorithms, download this folder and import it into a Java project.
