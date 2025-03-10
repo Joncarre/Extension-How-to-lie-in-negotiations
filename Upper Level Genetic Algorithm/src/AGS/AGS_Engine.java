@@ -91,7 +91,7 @@ public class AGS_Engine {
 	}
 	
 	/**
-	 * Almacena los genes de los individuos fittest del AGS
+	 * Stores the genes of AGS fittest individuals
 	 * @throws IOException
 	 */
 	public void printBest() throws IOException{
@@ -103,18 +103,18 @@ public class AGS_Engine {
 	}
 	
 	/**
-	 * Almacena los genes de los individuos fittest del AGI y la utilidad del Agente 0 con las preferencias reales
+	 * Stores the genes of the AGI fittest individuals and the utility of Agent 0 with actual preferences
 	 * @throws IOException
 	 */
 	public void printSolution() throws IOException{
     	this.writeFile = new CustomWriteFile("result_Solution.txt");
     	int[] solution = new int[AGS_Individual.defaultGeneLength];
     	solution = this.myPop.getIndividual(0).getSolution();
-		// Almacenamos el fitness del Agente 0
+		// We store the fitness of Agent 0
 		double fitness = 0.0;
 		fitness = this.fitness.fitnessAgent0(solution);
 		String text1 = Double. toString(fitness);
-		// Almacenamos la solucion del AGI (conjunto de leyes aprobadas o no aprobadas)
+		// We store the solution of the AGI (set of laws approved or not approved)
     	String text2 = "";
     	for(int i = 0; i < solution.length; i++) {
     		text2 += solution[i] + " ";
@@ -128,7 +128,7 @@ public class AGS_Engine {
 	}
 	
 	/**
-	 * Almacena la utilidad del Agente 0 con las preferencias modificadas
+	 * Stores Agent 0 utility with modified preferences
 	 * @throws IOException
 	 */
 	public void printFitnessAgent0() throws IOException{
