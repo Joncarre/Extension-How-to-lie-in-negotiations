@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class CustomWriteFile extends FileWriter implements ICustomWriteFile{
 	
 	/**
-	 * Constructora que recibe nombre de fichero
+	 * File-named construction company
 	 * @param name
 	 * @throws IOException 
 	 */
