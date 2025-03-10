@@ -15,8 +15,8 @@ public class AGS_Individual {
     static int defaultGeneLength = 40;
     private Vector<Double> genes = new Vector<Double>(defaultGeneLength);
     private int[] solution = new int[defaultGeneLength];
-    private double fitness = 0; // Valor fittest del AGI pero calculado con las preferencias reales del Agente 0
-    private double fitnessAGI = 0; // Valor fittest que retorna el AGI
+    private double fitness = 0; // Fittest value of the AGI but calculated with the real preferences of the Agent 0
+    private double fitnessAGI = 0; // Fittest value returned by AGI
     Random random = new Random();
 	private CustomReadFile readFile;
 	private CustomWriteFile writeFile;
