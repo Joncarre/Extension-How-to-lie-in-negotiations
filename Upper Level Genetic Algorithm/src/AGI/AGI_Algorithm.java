@@ -38,16 +38,8 @@ public class AGI_Algorithm {
         		}
         	}
         }
-        /*
-        if(true) {
-            System.out.println("Población de padres con fitness calculado y ordenado");
-            for(int i = 0; i < popSize; i++){
-            	System.out.println("Ite: " + i + " Fitness: " + popEvolved.getIndividual(i).getOnlyFitness() + " ¦ Genes: " + popEvolved.getIndividual(i).toString() + " ¦ Preferences: " + AGI_FitnessCalc.printM_PreferencesAgent0());
-            }
-            System.out.println();
-        }
-		*/
-        // Almacenar índices y probabilidades asociadas
+	    
+        // Store indexes and associated probabilities
     	WeightedRandomSelect<String> indexes = new WeightedRandomSelect<>();
         double newValue = value;
         for(int i = 0; i < popSize; i++){
@@ -55,13 +47,13 @@ public class AGI_Algorithm {
          	indexes.addEntry(i,  newValue);
         }
       
-        // Construir la nueva población ya cruzada
+        // Build the new population already crossed
     	Random random = new Random();
         AGI_Population newPop = new AGI_Population(popSize);
         for(int i = 0; i < newPop.size(); i++){
-        	//Individual indiv1 = popEvolved.getIndividual(random.nextInt((popSize-1) - 0) + 0); // Selección random se la vieja población
-        	AGI_Individual indiv1 = popEvolved.getIndividual(indexes.getRandom()); // Selección ponderada según valor fitness
-        	AGI_Individual indiv2 = popEvolved.getIndividual(indexes.getRandom()); // Selección ponderada según valor fitness
+        	//Individual indiv1 = popEvolved.getIndividual(random.nextInt((popSize-1) - 0) + 0); // Random selection of the old population
+        	AGI_Individual indiv1 = popEvolved.getIndividual(indexes.getRandom()); // Weighted selection according to fitness value
+        	AGI_Individual indiv2 = popEvolved.getIndividual(indexes.getRandom()); // Weighted selection according to fitness value
             AGI_Individual newIndiv = crossover(indiv1, indiv2);
         	newPop.saveIndividual(i, newIndiv);
         }
@@ -73,7 +65,7 @@ public class AGI_Algorithm {
         	}
         }
         
-        // Calcular valores fitness de la población cruzada
+        // Calculate cross-population fitness values
         newPop.getFittest(); 
         
         if(elitism) {
@@ -92,15 +84,6 @@ public class AGI_Algorithm {
         		}
         	}
         }
-        /*
-        if(true) {
-            System.out.println("Población de hijos con fitness calculado y ordenado");
-            for(int i = 0; i < newPop.size(); i++){
-            	System.out.println("Ite: " + i + " Fitness: " + newPop.getIndividual(i).getOnlyFitness() + " ¦ Genes: " + newPop.getIndividual(i).toString() + " ¦ Preferences: " + AGI_FitnessCalc.printM_PreferencesAgent0());
-            }
-            System.out.println();
-        }
-        */
         return newPop;
     }
     
