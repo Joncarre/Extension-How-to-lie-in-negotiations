@@ -176,7 +176,7 @@ public class FitnessCalc {
      */
     public void updateBestFitness() throws IOException {
     	String TotalFitness = "";
-		// Elegimos el mejor individuo de la población
+		// Elegimos el mejor individuo de la poblaciÃ³n
     	Individual best = new Individual();
     	best = getBestIndividual();
 		//System.out.println("----> Fittest of AGI: " + best.getOnlyFitness() + "  |  " + best.toString());
@@ -219,22 +219,22 @@ public class FitnessCalc {
     
     public boolean distributionVariation() {
     	double totalVariation = 0.0;
-    	// Acumulamos la distribución 
+    	// We accumulate the distribution 
     	for(int k = 0; k < M_preferences.get(0).size(); k++) {
-    		if(!changedResources.contains(k)) { // Sólo se acumula la distribución absoluta de los n-m recursos#
+    		if(!changedResources.contains(k)) { // Only the absolute distribution of n-m resources is accumulated
     			totalVariation += Math.abs(M_preferences.get(0).get(k)) - (Math.abs(Temporal_preferences.get(k)));
     		}
     	}
     	boolean variacionNegativa = false;
-    	// Como la variación puede salir negativa, la transformamos en positiva
+    	// As the variation can be negative, we transform it into positive
     	if(totalVariation < 0) {
     		totalVariation *= -1;
     		variacionNegativa = true;
     	}
 
-    	// Calculamos el margen que tenemos para la distribucion
-    	double margenModificacion = 0.0; // Usado para distribuir la acumulacion entre los n-m recursos (toma el valor de preferencia de la ley i-esima)
-    	double margenReal = 0.0; // Usado para ver si es posible distribuir la acumulacion o si nos pasamos (toma el valor hasta 0 o a hasta -1000)
+    	// We calculate the margin we have for the distribution
+    	double margenModificacion = 0.0; // Used to distribute the accumulation among the n-m resources (takes the preference value of the i-th law)
+    	double margenReal = 0.0; // Used to see if it is possible to distribute the accumulation or if we overdo it (take the value up to 0 or up to -1000)
     	for(int r = 0; r < M_preferences.get(0).size(); r++) {
     		if(changedResources.contains(r)) {
     			if(M_preferences.get(0).get(r) > 0) {
@@ -250,16 +250,16 @@ public class FitnessCalc {
     	boolean seguir = true;
     	double test = 0.0;
 	    double testNegative = 0;
-    	if(Math.abs(totalVariation) >= margenReal) // Si no puedo distribuir la totalVariation entre los m recursos, terminamos
+    	if(Math.abs(totalVariation) >= margenReal) // If I can't distribute the totalVariation among the m resources, we end up with
     		seguir = false;
-    	else { // Si puedo, entonces lo distribuyo
+    	else { // If I can, then I will distribute it
     		if(variacionNegativa == false) {
-            	// Repartimos la variación y se lo añadimos un poquito a los m recursos segun la proporcionalidadK
+            	// We distribute the variation and add a little to the resources according to proportionality K
         		for(int i = 0; i < M_preferences.get(0).size(); i++) {
         			if(changedResources.contains(i)) {
-            	    	// Cogemos el valor actúal que tiene el recurso m_i
+            	    	// We take the current value of the resource m_i
              	    	double oldValue = M_preferences.get(0).get(i);
-             	    	double incremento = proporcionalidadk*(Math.abs(oldValue)); // Calculo la proporcionalidad en valor absoluto
+             	    	double incremento = proporcionalidadk*(Math.abs(oldValue)); // I calculate the proportionality in absolute value
              	    	test += incremento;
 
              	    	if(oldValue > 0) {
@@ -273,12 +273,12 @@ public class FitnessCalc {
         			}
         	    }	
     		}else {
-            	// Repartimos la variación y se lo añadimos un poquito a los m recursos segun la proporcionalidadK
+            	// We distribute the variation and add a little to the m resources according to the proportionality K
         		for(int i = 0; i < M_preferences.get(0).size(); i++) {
         			if(changedResources.contains(i)) {
-            	    	// Cogemos el valor actúal que tiene el recurso m_i
+            	    	// We take the current value of the resource m_i
              	    	double oldValue = M_preferences.get(0).get(i);
-             	    	double incremento = proporcionalidadk*(Math.abs(oldValue)); // Calculo la proporcionalidad en valor absoluto
+             	    	double incremento = proporcionalidadk*(Math.abs(oldValue)); // I calculate the proportionality in absolute value
              	    	test += incremento;
 
              	    	if(oldValue > 0) {
@@ -312,15 +312,15 @@ public class FitnessCalc {
     	
     	boolean result = false;
     	double oldValue = M_preferences.get(row).get(col);
-    	if(oldValue > 0) { // Si he votado positivamente la ley
-    		double newValue = (oldValue+(oldValue*0.1)); // 30% del valor absoluto
+    	if(oldValue > 0) { // If I voted in favor of the law
+    		double newValue = (oldValue+(oldValue*0.1)); // 30% of the absolute value
     		if(newValue < 1000) {
         		M_preferences.get(row).set(col, newValue);
         		result = true;
     		}
-    	}else if(oldValue < 0) { // Si he votado negativamente la ley
-    		double valuePositive = (oldValue*-1); // Paso el valor a positivo
-    		double newValue = (oldValue-((valuePositive-1)*0.1)); // 30% del valor absoluto
+    	}else if(oldValue < 0) { // If I voted against the law
+    		double valuePositive = (oldValue*-1); // I change the value to positive
+    		double newValue = (oldValue-((valuePositive-1)*0.1)); // 30% of the absolute value
     		if(newValue < 0) {
         		M_preferences.get(row).set(col, (double) newValue);
         		result = true;
@@ -334,14 +334,14 @@ public class FitnessCalc {
     public boolean setValueBaja(int row, int col) {
     	boolean result = false;
     	double oldValue = M_preferences.get(row).get(col);
-    	if(oldValue > 0) { // Si he votado positivamente la ley
-    		double newValue = (oldValue-(oldValue*0.1)); // 10% del valor que le queda por decrecer (mientras > 0)
+    	if(oldValue > 0) { // If I voted in favor of the law
+    		double newValue = (oldValue-(oldValue*0.1)); // 10% of the remaining value to be decreased (as long as > 0)
     		if(newValue > 0) {
         		M_preferences.get(row).set(col, newValue);
         		result = true;
     		}
-    	}else if(oldValue < 0) { // Si he votado negativamente la ley
-    		double newValue = (oldValue+(Math.abs(oldValue*0.1))); // 10% del valor que tiene actualmente (mientras > -1000)
+    	}else if(oldValue < 0) { // If I voted against the law
+    		double newValue = (oldValue+(Math.abs(oldValue*0.1))); // 10% of its current value (as long as > -1000)
     		if(newValue < 0) {
         		M_preferences.get(row).set(col, newValue);
         		result = true;
@@ -372,7 +372,7 @@ public class FitnessCalc {
     }
     
     /**
-     * Normaliza el vector haciendo que el valor absoluto sea igual a 1000
+     * Normalizes the vector by making the absolute value equal to 1000
      */
     public Vector<Double> formalizePreferences(Vector<Double> preference) {
     	double aux = 0;
