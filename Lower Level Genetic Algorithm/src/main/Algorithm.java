@@ -29,12 +29,6 @@ public class Algorithm {
         else
             elitismOffset = 0;
         
-        /*System.out.println("Población de padres con fitness calculado");
-        for(int i = 0; i < popSize; i++){
-        	System.out.println("Ite: " + i + " Fitness: " + popEvolved.getIndividual(i).getOnlyFitness() + " ¦ Genes: " + popEvolved.getIndividual(i).toString());
-        }
-        System.out.println();*/
-        
         // Bubble Sort
     	Individual temp1 = new Individual();
         for(int i = 0; i < popSize-1; i++){
@@ -46,16 +40,8 @@ public class Algorithm {
         		}
         	}
         }
-        /*
-        if(true) {
-            System.out.println("Población de padres con fitness calculado y ordenado");
-            for(int i = 0; i < popSize; i++){
-            	System.out.println("Ite: " + i + " Fitness: " + popEvolved.getIndividual(i).getOnlyFitness() + " ¦ Genes: " + popEvolved.getIndividual(i).toString());
-            }
-            System.out.println();
-        }*/
-	
-        // Almacenar índices y probabilidades asociadas
+
+        // Store indexes and associated probabilities
     	WeightedRandomSelect<String> indexes = new WeightedRandomSelect<>();
         double newValue = value;
         for(int i = 0; i < popSize; i++){
@@ -63,13 +49,13 @@ public class Algorithm {
          	indexes.addEntry(i,  newValue);
         }
       
-        // Construir la nueva población ya cruzada
+        // Build the new population already crossed
     	Random random = new Random();
         Population newPop = new Population(popSize);
         for(int i = 0; i < newPop.size(); i++){
-        	//Individual indiv1 = popEvolved.getIndividual(random.nextInt((popSize-1) - 0) + 0); // Selección random se la vieja población
-        	Individual indiv1 = popEvolved.getIndividual(indexes.getRandom()); // Selección ponderada según valor fitness
-        	Individual indiv2 = popEvolved.getIndividual(indexes.getRandom()); // Selección ponderada según valor fitness
+        	//Individual indiv1 = popEvolved.getIndividual(random.nextInt((popSize-1) - 0) + 0); // Random selection of the old population
+        	Individual indiv1 = popEvolved.getIndividual(indexes.getRandom()); // Weighted selection according to fitness value
+        	Individual indiv2 = popEvolved.getIndividual(indexes.getRandom()); // Weighted selection according to fitness value
             Individual newIndiv = crossover(indiv1, indiv2);
         	newPop.saveIndividual(i, newIndiv);
         }
@@ -81,7 +67,7 @@ public class Algorithm {
         	}
         }
         
-        // Calcular valores fitness de la población cruzada
+        // Calculate cross-population fitness values
         newPop.getFittest(); 
         
         if(elitism) {
@@ -100,15 +86,6 @@ public class Algorithm {
         		}
         	}
         }
-        /*
-        if(true) {
-            System.out.println("Población de hijos con fitness calculado y ordenado");
-            for(int i = 0; i < newPop.size(); i++){
-            	System.out.println("Ite: " + i + " Fitness: " + newPop.getIndividual(i).getOnlyFitness() + " ¦ Genes: " + newPop.getIndividual(i).toString());
-            }
-            System.out.println();
-        }*/
-      
         return newPop;
     }
     
