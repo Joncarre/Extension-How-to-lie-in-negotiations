@@ -32,7 +32,7 @@ public class AGS_Algorithm {
     public static AGS_Population evolvePopulation(AGS_Population popEvolved, AGI_Engine engine, int popSize, int generation) throws IOException {
     	popEvolved.getFittest(engine, true);
         
-        //System.out.println("Indiv: 		  " + popEvolved.getIndividual(0).toString() + "  |   " + popEvolved.getIndividual(0).getSolution());
+        // System.out.println("Indiv: 		  " + popEvolved.getIndividual(0).toString() + "  |   " + popEvolved.getIndividual(0).getSolution());
 
         int elitismOffset;
         if (elitism)
@@ -51,16 +51,8 @@ public class AGS_Algorithm {
         		}
         	}
         }
-        /*
-        if(true) {
-            System.out.println("Población de padres con fitness calculado y ordenado");
-            for(int i = 0; i < popSize; i++){
-            	System.out.println("Ite: " + i + " Fitness: " + popEvolved.getIndividual(i).getOnlyFitness() + " ¦ Genes: " + popEvolved.getIndividual(i).toString());
-            }
-            System.out.println();
-        }
-   		*/
-        // Almacenar índices y probabilidades asociadas
+
+        // Store indexes and associated probabilities
     	WeightedRandomSelect<String> indexes = new WeightedRandomSelect<>();
         double newValue = value;
         for(int i = 0; i < popSize; i++){
@@ -68,7 +60,7 @@ public class AGS_Algorithm {
          	indexes.addEntry(i,  newValue);
         }
       
-        // Construir la nueva población ya cruzada
+        // Build the new population already crossed
     	Random random = new Random();
         AGS_Population newPop = new AGS_Population(popSize);
     	AGS_Individual indiv1 = new AGS_Individual();
@@ -77,8 +69,8 @@ public class AGS_Algorithm {
         	newPop.saveIndividual(0, copyIndiv(popEvolved.getIndividual(0)));
         }
         for(int i = elitismOffset; i < popEvolved.size(); i++){
-        	indiv1 = copyIndiv(popEvolved.getIndividual(indexes.getRandom())); // Selección ponderada según valor fitness
-        	indiv2 = copyIndiv(popEvolved.getIndividual(indexes.getRandom())); // Selección ponderada según valor fitness
+        	indiv1 = copyIndiv(popEvolved.getIndividual(indexes.getRandom())); // Weighted selection according to fitness value
+        	indiv2 = copyIndiv(popEvolved.getIndividual(indexes.getRandom())); // Weighted selection according to fitness value
         	AGS_Individual newIndiv = crossover(indiv1, indiv2);
         	newPop.saveIndividual(i, newIndiv);
         }
@@ -90,7 +82,7 @@ public class AGS_Algorithm {
         	}
         }
 
-        // Calcular valores fitness de la población cruzada
+        // Calculate cross-population fitness values
         newPop.getFittest(engine, false); 
         
         // Bubble Sort
@@ -104,15 +96,6 @@ public class AGS_Algorithm {
         		}
         	}
         }
-        /*
-        if(true) {
-            System.out.println("Población de hijos con fitness calculado y ordenado");
-            for(int i = 0; i < newPop.size(); i++){
-            	System.out.println("Ite: " + i + " Fitness: " + newPop.getIndividual(i).getOnlyFitness() + " ¦ Genes: " + newPop.getIndividual(i).toString());
-            }
-            System.out.println();
-        }
-        */
         return newPop;
     }
     
