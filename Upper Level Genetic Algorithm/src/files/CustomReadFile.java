@@ -17,7 +17,7 @@ public class CustomReadFile extends FileReader implements ICustomReadFile {
 	private double endLine;
 	
 	/**
-	 * Constructora que recibe nombre de fichero
+	 * File-named construction company
 	 * @param name
 	 * @throws IOException 
 	 */
