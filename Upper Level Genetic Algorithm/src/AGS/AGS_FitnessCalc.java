@@ -80,22 +80,6 @@ public class AGS_FitnessCalc {
 			this.writeFile.closeWriteFile(this.writeFile);
 		}
     }
-    /*
-    /**
-     * Write O preference for each user
-     * @throws IOException
-     */
-    /*public void writePreferences_O() throws IOException {
-		for(int i = 0; i < numUsers; i++) {
-			String text = "";
-			this.writeFile = new CustomWriteFile("user_U_" + i + ".txt");
-			for(int j = 0; j < AGS_Individual.defaultGeneLength; j++)
-				text += O_preferences.get(i).get(j) + " ";
-			text += -1.0;
-			this.writeFile.writeVector(this.writeFile, text);
-			this.writeFile.closeWriteFile(this.writeFile);
-		}
-    }*/
     
     /**
      * Write M preference for each user
@@ -120,13 +104,13 @@ public class AGS_FitnessCalc {
      * @throws IOException 
      */
     public static double getFitness(AGI_Engine engine, AGS_Individual individual, int indiv_i) throws IOException {
-        // Sustituimos al individuo i-ésimo (recordemos que cada individuo del SGA es una asignación de recursos del U_0)
+        // We replace the i-th individual (remember that each individual in the EMS is a resource allocation of U_0)
     	M_preferences.set(0, individual.getGenes());
     	engine.setM_Preferences(M_preferences);
-    	// El fitness se calcula antes para que el primero de todos (cuando U_0 = R_0) no se modifique
+    	// The fitness is calculated before so that the first of all (when U_0 = R_0) is not modified
     	AGI_Individual bestAGI = engine.executeIGA(indiv_i, false);
-    	individual.setFitness(fitnessAgent0(bestAGI.getGenes())); // Guardar el fittest del AGI pero calculado con las preferencias reales del Agente 0
-    	individual.setFitnessAGI(bestAGI.getFitness()); // Guardar el fittest del AGI
+    	individual.setFitness(fitnessAgent0(bestAGI.getGenes())); // Save the AGI fittest but calculated with the actual preferences of Agent 0
+    	individual.setFitnessAGI(bestAGI.getFitness()); // Save the AGI fittest
     	individual.setSolution(bestAGI.getGenes());
     	return individual.getOnlyFitness();
     } 
@@ -156,7 +140,7 @@ public class AGS_FitnessCalc {
     }
    
     /**
-     * Normaliza el vector haciendo que el valor absoluto sea igual a 1000
+     * Normalizes the vector by making the absolute value equal to 1000
      */
     public Vector<Double> formalizePreferences(Vector<Double> preference) {
     	double aux = 0;
@@ -169,7 +153,7 @@ public class AGS_FitnessCalc {
     }
     
     /**
-     * Metodo para aniadir el fitness del agent 0 al fichero result_solution.txt
+     * Method to add the fitness of agent 0 to the file result_solution.txt
      * @param solution
      * @return
      */
@@ -182,7 +166,7 @@ public class AGS_FitnessCalc {
     }
     
     /**
-     * Metodo para aniadir el fitness del agent 0 al fichero result_solution.txt
+     * Method to add the fitness of agent 0 to the file result_solution.txt
      * @param solution
      * @return
      */
