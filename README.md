@@ -1,4 +1,4 @@
-# Extension How to lie in negotiations
+# To lie or not to lie... in negotiations under egalitarian social welfare
 
 This repository contains the resources that complement the article `To lie or not to lie... in negotiations under egalitarian social welfare`. Here you can download in PDF format the preferences of the ten agents used in the Unlimited and Limited scenarios. Note that the preferences of Agent 0 are marked in green or red depending on whether they are positive or negative. This Agent 0 is the so-called “Lying political party”. In other words; it is the political party that tries to carry out strategic behaviors.
 
